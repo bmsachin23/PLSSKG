@@ -1,0 +1,25 @@
+# Hybrid SKG+PQC System Requirements
+
+## Core Dependencies
+cryptography>=41.0.0
+numpy>=1.24.0
+texttable>=1.6.7
+
+## Post-Quantum Cryptography (Optional but Recommended)
+# Uncomment to use real PQC implementations instead of simulations
+# pqcrypto>=0.1.5
+
+## Benchmarking and Analysis
+matplotlib>=3.7.0
+scipy>=1.10.0
+
+## Data Processing
+pandas>=2.0.0
+
+## Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+## Documentation
+sphinx>=6.2.0
+sphinx-rtd-theme>=1.2.0
