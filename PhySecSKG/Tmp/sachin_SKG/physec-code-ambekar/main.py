@@ -16,8 +16,8 @@ def generatekey(row_number, fileName):
     """
     profile_values: List = []
 
-    fileDir = os.path.dirname(os.path.realpath('__file__'))
-    fileNameEnb = os.path.join(fileDir, fileName)
+    # Use the fileName directly if it's already an absolute path
+    fileNameEnb = fileName if os.path.isabs(fileName) else os.path.join(os.path.dirname(os.path.abspath(__file__)), fileName)
 
     # channelProfile object creation
     profile: ChannelProfile = ChannelProfile(fileNameEnb)
@@ -63,13 +63,16 @@ def generatekey(row_number, fileName):
 
 
 ####################################################################################
+script_dir = os.path.dirname(os.path.abspath(__file__))
+mobile_combined_path = os.path.join(script_dir, 'Testdata', 'mobile_combined.csv')
+
 enb_var_quantise_PK, enb_block_var_quantise_PK, enb_stddev_quantise_PK, enb_block_stddev_quantise_PK, \
 enb_median_quantise_PK, enb_block_median_quantise_PK, enb_mean_quantise_PK, enb_block_mean_quantise_PK \
-    = generatekey(5, 'Testdata/mobile_combined.csv')
+    = generatekey(5, mobile_combined_path)
 
 ue_var_quantise_PK, ue_block_var_quantise_PK, ue_stddev_quantise_PK, ue_block_stddev_quantise_PK, \
 ue_median_quantise_PK, ue_block_median_quantise_PK, ue_mean_quantise_PK, ue_block_mean_quantise_PK \
-    = generatekey(6, 'Testdata/mobile_combined.csv')
+    = generatekey(6, mobile_combined_path)
 
 ###########################Display Results in Terminal in table format ########################
 t = Texttable()
@@ -111,7 +114,10 @@ print(t.draw())
 ##########################################################################################
 print("************************AI*******************")
 enhanced_profile = Reciprocityenhancer()
-enb, ue = enhanced_profile.avgprofile('Testdata/trainingdata1.csv', 'Testdata/mobile_combined.csv', 5, 6)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+training_file = os.path.join(script_dir, 'Testdata', 'trainingdata1.csv')
+mobile_file = os.path.join(script_dir, 'Testdata', 'mobile_combined.csv')
+enb, ue = enhanced_profile.avgprofile(training_file, mobile_file, 5, 6)
 
 enb_t = []
 for value in enb:

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import *
@@ -10,7 +11,7 @@ from channelProfile import ChannelProfile
 class Reciprocityenhancer:
 
     def cdt(self,list):
-        data_path = "dctmatrix.csv"
+        data_path = os.path.join(os.path.dirname(__file__), "dctmatrix.csv")
         cdt_matrix: np.ndarray = np.genfromtxt(data_path, delimiter=',')
         profile = np.asmatrix(list)
         cdt_matrix = np.asmatrix(cdt_matrix)
